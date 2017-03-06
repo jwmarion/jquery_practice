@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Todo List Exercise</title>
+    <script src="jquery.js"></script>
+    <script>
+
+    $(function() {
+      $('.itext').hide();
+
+      $('#add-button').click(function(e){
+        $('#todo-list').append('<li><input class="check" type="checkbox"><input class="itext" type="text"><span>' + $('#description').val() + '</span><input class="del btn" type="button" value="X"><input class="edit btn" type="button" value="Edit"></li>');
+
+      });
+
+      $('#todo-list').on('click', '.del', function(e){
+         $(this).parent('li').remove();
+      });
+
+      $('#todo-list').on('click', '.check', function(e){
+        if($(this).is(':checked')){
+          $(this).parent('li').find('span').css('text-decoration','line-through');
+        }
+        else{
+          $(this).parent('li').find('span').css('text-decoration','none');
+        }
+      });
+      $('#todo-list').on('click', '.edit', function(e){
+        if($(this).parent('li').find('span').is(':hidden')){
+          $(this).parent('li').find('.itext').hide();
+          $(this).parent('li').find('span').show();
+        }
+        else{
+          $(this).parent('li').find('.itext').show();
+          $(this).parent('li').find('span').hide();
+        }
+
+      })
+
+
+    });
+    /*
+    Make a Todo List
+
+    0. Make it so that after entering the task description, in the text field and clicking the "Add Task" button, a new task appears inside the element with the id todo-list.
+    1. the ability to remove tasks (add an x button)
+    2. the ability to check off tasks - strikes them out wo removing (add a checkbox)
+    3. the ability to delete a task
+    4. the ability to edit an existing task
+
+    */
+    </script>
+    <style>
+    #wrapper {
+      max-width: 480px;
+      margin: auto;
+    }
+
+    #description, #search, #todo-list {
+      font-size: 1.5em;
+    }
+    .btn{
+      border: 1px solid black;
+      margin: 2px;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <input id="description" type="text" name="description">
+      <button id="add-button">Add Task</button>
+      <ul id="todo-list">
+        <li><input class="check" type="checkbox"><input class="itext" type="text"><span>Feed the cat</span><input class="del btn" type="button" value="X"><input class="edit btn" type="button" value="Edit"></li>
+      </ul>
+    </div>
+  </body>
+</html>
